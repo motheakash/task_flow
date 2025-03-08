@@ -2,10 +2,11 @@ package main
 
 import (
 	"log"
+	"task_flow/internal/apps/users/routes"
 	"task_flow/internal/config"
 	"task_flow/pkg/database"
 	"task_flow/pkg/logger"
-	"task_flow/tests/health" // Import the health routes from tests
+	"task_flow/tests/health"
 
 	"github.com/gin-gonic/gin"
 )
@@ -33,6 +34,7 @@ func main() {
 	api := router.Group("/api/v1")
 	{
 		health.SetupHealthRoutes(api, db)
+		routes.RegisterUserRoutes(api, db)
 	}
 
 	// Start server
